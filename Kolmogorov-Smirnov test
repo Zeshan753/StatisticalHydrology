@@ -1,0 +1,10 @@
+import numpy as np
+from scipy.stats import kstest
+
+a = np.random.normal(0, 1, 1000)
+b = np.random.normal(0.5, 1, 1000)
+
+result = kstest(a, b)
+
+print('KS statistic:', result.statistic)
+print('p-value:', result.pvalue)
