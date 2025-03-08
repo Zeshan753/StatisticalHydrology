@@ -1,0 +1,54 @@
+import pandas
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+%matplotlib inline
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LinearRegression
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.seasonal import seasonal_decompose
+from scipy.stats import kendalltau
+from scipy.stats import chi2_contingency
+from scipy.stats import kstest
+from scipy.stats import anderson
+from scipy.stats import shapiro
+import statsmodels.api as sm
+from scipy.stats import f_oneway
+from scipy.stats import spearmanr
+
+colms = ['']
+excel_data_df = pandas.read_excel('Astore Basin Data.xlsx', sheet_name='Sheet1')
+excel_data_df
+
+excel_data_df[excel_data_df['Observed flow'].isna()]
+excel_data_df.describe()
+
+X = excel_data_df.iloc[:, 0:-1]
+X = X.drop(['Date','Astore Tmin','Astore Rainfall', 'Ramma Tmax', 'Ramma Tmin', 'Ramma Rainfall', 'Rattu Tmax', 'Rattu Tmin', 'Rattu Rainfall'], axis=1)
+y = excel_data_df.iloc[:, -1]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+X_train = X_train.fillna(X_train.mean())
+X_test = X_test.fillna(X_train.mean())
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+lm = LinearRegression()
+lm.fit(X_train, y_train)
+y_pred = lm.predict(X_test)
+elm = LinearRegression().fit(X, y)
+y_pred = elm.predict(X_test)
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+y_pred = elm.predict(X_test)
+
+mse = mean_squared_error(y_test, y_pred)
+rmse = mean_squared_error(y_test, y_pred, squared=False)
+mae = mean_absolute_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print("MSE: ", mse)
+print("RMSE: ", rmse)
+print("MAE: ", mae)
+print("R2 score: ", r2)
