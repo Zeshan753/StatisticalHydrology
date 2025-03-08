@@ -1,0 +1,11 @@
+import numpy as np
+from scipy.stats import f_oneway
+
+group1 = np.random.normal(0, 1, 100)
+group2 = np.random.normal(1, 1, 100)
+group3 = np.random.normal(2, 1, 100)
+
+f_statistic, pvalue = f_oneway(group1, group2, group3)
+
+print("F-statistic:", f_statistic)
+print("p-value:", pvalue)
