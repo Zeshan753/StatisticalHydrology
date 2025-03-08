@@ -1,0 +1,14 @@
+import numpy as np
+from scipy.stats import anderson
+
+a = np.random.normal(0, 1, 1000)
+b = np.random.normal(0.5, 1, 1000)
+
+# Perform the Anderson-Darling test on the two arrays
+result_a = anderson(a)
+result_b = anderson(b)
+
+print("Anderson-Darling test statistic for array a:", result_a.statistic)
+print("Critical values for array a:", result_a.critical_values)
+print("Anderson-Darling test statistic for array b:", result_b.statistic)
+print("Critical values for array b:", result_b.critical_values)
