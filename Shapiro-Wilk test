@@ -1,0 +1,10 @@
+import numpy as np
+from scipy.stats import shapiro
+
+
+data = np.random.normal(0, 1, 1000)
+
+statistic, pvalue = shapiro(data)
+
+print("Shapiro-Wilk test statistic:", statistic)
+print("p-value:", pvalue)
