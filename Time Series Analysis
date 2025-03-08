@@ -1,0 +1,21 @@
+data = pd.read_excel('Basin Data.xlsx', index_col='Date', parse_dates=True)
+
+plt.figure(figsize=(10,5))
+plt.plot(data)
+plt.title('Basin Data')
+plt.xlabel('Date')
+plt.ylabel('Observed flow')
+plt.show()
+
+result = adfuller(data['Observed flow'])
+print('ADF Statistic: %f' % result[0])
+print('p-value: %f' % result[1])
+print('Critical Values:')
+for key, value in result[4].items():
+    print('\t%s: %.3f' % (key, value))
+
+plt.figure(figsize=(10,6))
+plt.subplot(411)
+plt.plot(data, label='Original')
+plt.legend(loc='upper left')
+plt.subplot(412)
