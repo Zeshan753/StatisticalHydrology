@@ -1,0 +1,10 @@
+import numpy as np
+import statsmodels.api as sm
+
+
+data = np.random.normal(0, 1, 1000)
+
+
+dw_statistic = sm.stats.stattools.durbin_watson(data)
+
+print("Durbin-Watson test statistic:", dw_statistic)
