@@ -1,0 +1,15 @@
+import numpy as np
+from scipy.stats import spearmanr
+import numpy as np
+from scipy.stats import spearmanr
+
+
+x = np.random.normal(0, 1, 100)
+y = np.random.normal(0, 1, 100)
+
+
+corr_coef, pvalue = spearmanr(x, y)
+
+
+print("Spearman rank correlation coefficient:", corr_coef)
+print("p-value:", pvalue)
