@@ -1,0 +1,18 @@
+import pandas as pd
+import numpy as np
+from scipy.stats import kendalltau
+
+df = pd.read_csv('streamflow.csv')
+
+trend, p_value = kendalltau(df['flow'], df['date'])
+
+print("Mann-Kendall Trend Test Results:")
+print("Trend: ", trend)
+print("p-value: ", p_value)
+
+
+alpha = 0.05
+if p_value < alpha:
+    print("Reject the null hypothesis of no trend")
+else:
+    print("Fail to reject the null hypothesis of no trend")
